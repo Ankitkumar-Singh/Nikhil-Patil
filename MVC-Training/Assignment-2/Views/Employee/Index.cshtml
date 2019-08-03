@@ -1,29 +1,31 @@
-﻿@model IEnumerable<Assignment_2.Models.Employee>
+﻿@using Assignment_2.Models;
 
-@using Assignment_2.Models;
+@model IEnumerable<Assignment_2.Models.Department>
 
 @{
-    ViewBag.Title = "Employee List";
+    ViewBag.Title = "Department List";
 }
 
-<div class=" container text-center mt-5">
-    <h2>Employee List</h2>
-    <hr/>
-</div>
-<div class="container mt-5">
-    <table class="table table-striped table-hover">
-        <tr>
-            <th>Name</th>
-            <th>Gender</th>
-            <th>City</th>
-        </tr>
-        @foreach (Employee employee in Model)
-        {
+
+<div class="container text-center mt-5">
+    <h2>Department List</h2>
+    <div class="col-sm-6 offset-sm-3 mt-5">
+        <table class="table table-bordered shadow">
             <tr>
-                <td>@employee.Name</td>
-                <td>@employee.Gender</td>
-                <td>@employee.City</td>
+                <th>
+                    @Html.DisplayNameFor(model => model.DepartmentName)
+                </th>
             </tr>
-        }
-    </table>
+
+            @foreach (Department department in @Model)
+            {
+                <tr>
+                    <td>
+                        @Html.ActionLink(department.DepartmentName, "EmployeeByDepartment", "Employee", new { departmentId = department.DepartmentId }, null)
+                    </td>
+                </tr>
+            }
+
+        </table>
+    </div>
 </div>

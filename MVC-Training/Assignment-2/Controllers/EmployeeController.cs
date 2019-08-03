@@ -7,20 +7,28 @@ namespace Assignment_2.Controllers
 {
     public class EmployeeController : Controller
     {
+        #region Department list
+        /// <summary>Displays list of departments.</summary>
         public ActionResult Index()
         {
             EmployeeContext employeeContext = new EmployeeContext();
-            List<Employee> employees = employeeContext.Employees.ToList();
+            List<Department> departments = employeeContext.Departments.ToList();
+
+            return View(departments);
+        }
+        #endregion
+
+        #region Employee list
+        /// <summary>Employees by the department.</summary>
+        /// <param name="departmentId">The department identifier.</param>
+        public ActionResult EmployeeByDepartment(int departmentId)
+        {
+            EmployeeContext employeeContext = new EmployeeContext();
+            List<Employee> employees = employeeContext.Employees.Where(emp => emp.DepartmentId == departmentId).ToList();
 
             return View(employees);
         }
+        #endregion
 
-        //public ActionResult Details()
-        //{
-        //    EmployeeContext employeeContext = new EmployeeContext();
-        //    Employee employee = employeeContext.Employees.Single(emp => emp.Id == id);
-
-        //    return View(employee);
-        //}
     }
 }
