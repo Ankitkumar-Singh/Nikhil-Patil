@@ -10,6 +10,7 @@
 namespace Assignment_5.Models
 {
     using System.Collections.Generic;
+    using System.ComponentModel.DataAnnotations;
 
     public partial class Department
     {
@@ -26,6 +27,7 @@ namespace Assignment_5.Models
 
         /// <summary>Gets or sets the name of the department.</summary>
         /// <value>The name of the department.</value>
+        [Display(Name = "Departmane name")]
         public string DepartmentName { get; set; }
 
         /// <summary>Gets or sets the employees.</summary>

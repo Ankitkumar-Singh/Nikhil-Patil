@@ -8,46 +8,58 @@
     <h3>Are you sure you want to delete this?</h3>
     <div>
         <hr />
-        <dl class="dl-horizontal">
-            
-            <dt>
-                @Html.DisplayNameFor(model => model.Name)
-            </dt>
+        <div class="row">
+            <div class="col-md-3">
+                <b>@Html.DisplayNameFor(model => model.Name)</b>
+            </div>
+            <div class="col-md-1">
+                :
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.Name, new { @class = "form-control" })
+            </div>
+        </div>
 
-            <dd>
-                @Html.DisplayFor(model => model.Name)
-            </dd>
+        <div class="row">
+            <div class="col-md-3">
+                <b>@Html.DisplayNameFor(model => model.Gender)</b>
+            </div>
+            <div class="col-md-1">
+                :
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.Gender, new { @class = "form-control" })
+            </div>
+        </div>
 
-            <dt>
-                @Html.DisplayNameFor(model => model.Gender)
-            </dt>
+        <div class="row">
+            <div class="col-md-3">
+                <b>@Html.DisplayNameFor(model => model.City)</b>
+            </div>
+            <div class="col-md-1">
+                :
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.City, new { @class = "form-control" })
+            </div>
+        </div>
 
-            <dd>
-                @Html.DisplayFor(model => model.Gender)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.City)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.City)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Department.DepartmentName)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.Department.DepartmentName)
-            </dd>
-
-        </dl>
+        <div class="row">
+            <div class="col-md-3">
+                <b>@Html.DisplayNameFor(model => model.Department.DepartmentName)</b>
+            </div>
+            <div class="col-md-1">
+                :
+            </div>
+            <div class="col-md-6">
+                @Html.DisplayFor(model => model.Department.DepartmentName, new { @class = "form-control" })
+            </div>
+        </div>
 
         @using (Html.BeginForm())
         {
-            <div class="form-actions no-color">
-                @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-outline-primary" })
+            <div class="form-actions no-color mt-5">
+                @Html.ActionLink("Cancel", "Index", null, new { @class = "btn btn-outline-primary" })
                 <input type="submit" value="Delete" class="btn btn-outline-danger" />
 
             </div>

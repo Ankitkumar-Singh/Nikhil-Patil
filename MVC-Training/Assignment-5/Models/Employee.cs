@@ -21,6 +21,7 @@ namespace Assignment_5.Models
         /// <summary>Gets or sets the name.</summary>
         /// <value>The name.</value>
         [Required]
+        [Display(Name = "Employee name")]
         public string Name { get; set; }
 
         /// <summary>Gets or sets the gender.</summary>
