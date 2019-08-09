@@ -35,6 +35,11 @@ namespace Assignment_5.Controllers
         [HttpPost]
         public ActionResult Create([Bind(Include = "Id,Name,Gender,City,DepartmentId")] Employee employee)
         {
+            if (string.IsNullOrEmpty(employee.Name))
+            {
+                ModelState.AddModelError("Name", "The Name field is required.");
+            }
+
             if (ModelState.IsValid)
             {
                 db.Employees.Add(employee);
@@ -66,11 +71,20 @@ namespace Assignment_5.Controllers
 
         // POST: Employee/Edit/5
         [HttpPost]
-        public ActionResult Edit([Bind(Include = "Id,Name,Gender,City,DepartmentId")] Employee employee)
+        public ActionResult Edit([Bind(Exclude = "Name")] Employee employee)
         {
+            Employee employeeFromDB = db.Employees.Single(x => x.Id == employee.Id);
+            employeeFromDB.Id = employee.Id;
+            employeeFromDB.Gender = employee.Gender;
+            employeeFromDB.City = employee.City;
+            employeeFromDB.DepartmentId = employee.DepartmentId;
+
+            employee.Name = employeeFromDB.Name;
+
+
             if (ModelState.IsValid)
             {
-                db.Entry(employee).State = EntityState.Modified;
+                db.Entry(employeeFromDB).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
