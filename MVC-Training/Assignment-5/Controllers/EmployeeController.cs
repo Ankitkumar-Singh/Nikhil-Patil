@@ -3,6 +3,10 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
+using PagedList.Mvc;
+using PagedList;
+using System;
+using System.Collections.Generic;
 
 namespace Assignment_5.Controllers
 {
@@ -14,11 +18,31 @@ namespace Assignment_5.Controllers
         #endregion
 
         #region Display list method
-        // GET: Employee
-        public ActionResult Index()
+        /// <summary>GET method for employee</summary>
+        public ActionResult Index(string searchBy, string search, int? page, string sortBy)
         {
-            var employees = db.Employees.Include(e => e.Department);
-            return View(employees.ToList());
+            ViewBag.NameSort = String.IsNullOrEmpty(sortBy) ? "Name desc" : "";
+            var employees = db.Employees.AsQueryable();
+            if (searchBy == "Gender")
+            {
+                employees = employees.Include(e => e.Department).Where(x => x.Gender == search || search == null);
+            }
+            else
+            {
+                employees = employees.Include(e => e.Department).Where(x => x.Name.StartsWith(search) || search == null);
+            }
+
+            switch (sortBy)
+            {
+                case "Name desc":
+                    employees = employees.OrderByDescending(x => x.Name);
+                    break;
+                default:
+                    employees = employees.OrderBy(x => x.Name);
+                    break;
+            }
+
+            return View(employees.ToPagedList(page ?? 1, 3));
         }
         #endregion
 
@@ -33,7 +57,7 @@ namespace Assignment_5.Controllers
         /// <summary>Creates the specified employee.</summary>
         /// <param name="employee">The employee.</param>
         [HttpPost]
-        public ActionResult Create([Bind(Include = "Id,Name,Gender,City,DepartmentId")] Employee employee)
+        public ActionResult Create(Employee employee)
         {
             if (string.IsNullOrEmpty(employee.Name))
             {
@@ -53,7 +77,8 @@ namespace Assignment_5.Controllers
         #endregion
 
         #region Edit method
-        // GET: Employee/Edit/5
+        /// <summary>Edits the specified identifier.</summary>
+        /// <param name="id">The identifier.</param>
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -69,7 +94,8 @@ namespace Assignment_5.Controllers
             return View(employee);
         }
 
-        // POST: Employee/Edit/5
+        /// <summary>Edits the specified employee.</summary>
+        /// <param name="employee">The employee.</param>
         [HttpPost]
         public ActionResult Edit([Bind(Exclude = "Name")] Employee employee)
         {
@@ -134,5 +160,13 @@ namespace Assignment_5.Controllers
             base.Dispose(disposing);
         }
         #endregion
+
+        [HttpPost]
+        public ActionResult DeleteMultiple(IEnumerable<int> employeeIdsToDelete)
+        {
+            db.Employees.Where(x => employeeIdsToDelete.Contains(x.Id)).ToList().ForEach(x => db.Employees.Remove(x));
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }

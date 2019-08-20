@@ -29,6 +29,7 @@ namespace Assignment_5.Models
     
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Employee> Employees { get; set; }
+        public virtual DbSet<Comment> Comments { get; set; }
     
         public virtual ObjectResult<Operations_Result> Operations(string action, Nullable<int> id, string name, string gender, string city, Nullable<System.DateTime> dateOfBirth)
         {

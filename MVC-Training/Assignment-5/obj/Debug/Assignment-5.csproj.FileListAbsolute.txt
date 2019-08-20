@@ -74,3 +74,7 @@ D:\MVC-Training\Assignment-5\bin\roslyn\System.Net.Sockets.dll
 D:\MVC-Training\Assignment-5\bin\roslyn\System.Runtime.InteropServices.RuntimeInformation.dll
 D:\MVC-Training\Assignment-5\bin\roslyn\System.Threading.Tasks.Extensions.dll
 D:\MVC-Training\Assignment-5\obj\Debug\Assignment-5.csprojAssemblyReference.cache
+D:\MVC-Training\Assignment-5\bin\PagedList.dll
+D:\MVC-Training\Assignment-5\bin\PagedList.Mvc.dll
+D:\MVC-Training\Assignment-5\bin\PagedList.xml
+D:\MVC-Training\Assignment-5\bin\PagedList.Mvc.xml

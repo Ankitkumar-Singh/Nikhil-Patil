@@ -9,28 +9,21 @@
 
 namespace Assignment_5.Models
 {
+    using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class Department
     {
-        /// <summary>Initializes a new instance of the <see cref="Department"/> class.</summary>
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Department()
         {
             this.Employees = new HashSet<Employee>();
         }
-
-        /// <summary>Gets or sets the department identifier.</summary>
-        /// <value>The department identifier.</value>
+    
         public int DepartmentId { get; set; }
-
-        /// <summary>Gets or sets the name of the department.</summary>
-        /// <value>The name of the department.</value>
-        [Display(Name = "Department name")]
         public string DepartmentName { get; set; }
-
-        /// <summary>Gets or sets the employees.</summary>
-        /// <value>The employees.</value>
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employees { get; set; }
     }
 }
