@@ -12,6 +12,7 @@
     <EntitySetMapping Name="Employees">
       <EntityTypeMapping TypeName="Models.Employee">
         <MappingFragment StoreEntitySet="EmployeeDetails">
+          <ScalarProperty Name="Email" ColumnName="Email" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Gender" ColumnName="Gender" />

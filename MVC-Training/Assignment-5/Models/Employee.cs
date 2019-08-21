@@ -9,16 +9,28 @@
 
 namespace Assignment_5.Models
 {
+    using Assignment_5.Common;
     using System;
-    using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations;
+
     public partial class Employee
     {
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Please enter your name")]
         public string Name { get; set; }
+
+        [Required(ErrorMessage = "Please select your gender")]
         public string Gender { get; set; }
+
+        [Required(ErrorMessage = "Please enter your city")]
         public string City { get; set; }
+
+        [Required(ErrorMessage = "Please select your department")]
         public Nullable<int> DepartmentId { get; set; }
+
+        [RemoteClientServer("IsEmailAvailable","Employee", ErrorMessage = "Email already available")]
+        public string Email { get; set; }
     
         public virtual Department Department { get; set; }
     }

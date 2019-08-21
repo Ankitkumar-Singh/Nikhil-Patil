@@ -3,7 +3,6 @@ using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
-using PagedList.Mvc;
 using PagedList;
 using System;
 using System.Collections.Generic;
@@ -85,11 +84,14 @@ namespace Assignment_5.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Employee employee = db.Employees.Find(id);
+
             if (employee == null)
             {
                 return HttpNotFound();
             }
+
             ViewBag.DepartmentId = new SelectList(db.Departments, "DepartmentId", "DepartmentName", employee.DepartmentId);
             return View(employee);
         }
@@ -97,7 +99,7 @@ namespace Assignment_5.Controllers
         /// <summary>Edits the specified employee.</summary>
         /// <param name="employee">The employee.</param>
         [HttpPost]
-        public ActionResult Edit([Bind(Exclude = "Name")] Employee employee)
+        public ActionResult Edit([Bind(Exclude = "Name,Email")] Employee employee)
         {
             Employee employeeFromDB = db.Employees.Single(x => x.Id == employee.Id);
             employeeFromDB.Id = employee.Id;
@@ -106,7 +108,7 @@ namespace Assignment_5.Controllers
             employeeFromDB.DepartmentId = employee.DepartmentId;
 
             employee.Name = employeeFromDB.Name;
-
+            employee.Email = employeeFromDB.Email;
 
             if (ModelState.IsValid)
             {
@@ -146,6 +148,16 @@ namespace Assignment_5.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        /// <summary>Deletes the multiple.</summary>
+        /// <param name="employeeIdsToDelete">The employee ids to delete.</param>
+        [HttpPost]
+        public ActionResult DeleteMultiple(IEnumerable<int> employeeIdsToDelete)
+        {
+            db.Employees.Where(x => employeeIdsToDelete.Contains(x.Id)).ToList().ForEach(x => db.Employees.Remove(x));
+            db.SaveChanges();
+            return RedirectToAction("Index");
+        }
         #endregion
 
         #region Connection dispose
@@ -161,12 +173,11 @@ namespace Assignment_5.Controllers
         }
         #endregion
 
-        [HttpPost]
-        public ActionResult DeleteMultiple(IEnumerable<int> employeeIdsToDelete)
+        #region Email Check
+        public JsonResult IsEmailAvailable(string email)
         {
-            db.Employees.Where(x => employeeIdsToDelete.Contains(x.Id)).ToList().ForEach(x => db.Employees.Remove(x));
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            return Json(!db.Employees.Any(e => e.Email == email), JsonRequestBehavior.AllowGet);
         }
+        #endregion
     }
 }

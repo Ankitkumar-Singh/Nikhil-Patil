@@ -1,15 +1,18 @@
 ﻿@model Assignment_5.Models.Employee
-<tr>
-    <td>
-        <input type="checkbox" name="employeeIdsToDelete" id="employeeIdsToDelete" value="@Model.ID" />
-    </td>
-    <td>
-        @Model.Name
-    </td>
-    <td>
-        @Model.Gender
-    </td>
-    <td>
-        @Model.Email
-    </td>
-</tr>
+    <tr>
+        <td>
+            <input type="checkbox" name="employeeIdsToDelete" id="employeeIdsToDelete" value="@Model.Id" />
+        </td>
+        <td>
+            @Model.Name
+        </td>
+        <td>
+            @Model.Gender
+        </td>
+        <td>
+            @Model.City
+        </td>
+        <td>
+            @Model.Department
+        </td>
+    </tr>

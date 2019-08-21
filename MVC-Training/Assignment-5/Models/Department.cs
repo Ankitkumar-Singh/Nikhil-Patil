@@ -9,12 +9,10 @@
 
 namespace Assignment_5.Models
 {
-    using System;
     using System.Collections.Generic;
     
     public partial class Department
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Department()
         {
             this.Employees = new HashSet<Employee>();
@@ -23,7 +21,6 @@ namespace Assignment_5.Models
         public int DepartmentId { get; set; }
         public string DepartmentName { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Employee> Employees { get; set; }
     }
 }

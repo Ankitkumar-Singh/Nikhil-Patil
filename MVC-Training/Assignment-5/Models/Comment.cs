@@ -9,16 +9,18 @@
 
 namespace Assignment_5.Models
 {
-    using System;
-    using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
 
     public partial class Comment
     {
+        [ScaffoldColumn(false)]
         public int Id { get; set; }
+
+        [Required(ErrorMessage = "Please enter your name")]
         public string Name { get; set; }
 
         [Display(Name = "Comment")]
+        [Required(ErrorMessage = "Please enter comment")]
         public string Comment1 { get; set; }
     }
 }

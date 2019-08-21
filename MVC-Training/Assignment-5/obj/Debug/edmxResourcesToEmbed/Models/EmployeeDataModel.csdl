@@ -18,6 +18,7 @@
     <Property Name="City" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
     <Property Name="DepartmentId" Type="Int32" />
     <NavigationProperty Name="Department" Relationship="Self.FK__EmployeeD__Depar__02084FDA" FromRole="EmployeeDetails" ToRole="Departments" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <Association Name="FK__EmployeeD__Depar__02084FDA">
     <End Role="Departments" Type="Self.Department" Multiplicity="0..1" />
