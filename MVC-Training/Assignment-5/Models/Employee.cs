@@ -31,7 +31,7 @@ namespace Assignment_5.Models
 
         [RemoteClientServer("IsEmailAvailable","Employee", ErrorMessage = "Email already available")]
         public string Email { get; set; }
-    
+
         public virtual Department Department { get; set; }
     }
 }

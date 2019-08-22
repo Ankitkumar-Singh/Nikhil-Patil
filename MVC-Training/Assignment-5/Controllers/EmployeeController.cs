@@ -11,7 +11,7 @@ namespace Assignment_5.Controllers
 {
     public class EmployeeController : Controller
     {
-        #region Variable declarations
+        #region Declarations
         /// <summary>The database</summary>
         private readonly EmployeeContext db = new EmployeeContext();
         #endregion

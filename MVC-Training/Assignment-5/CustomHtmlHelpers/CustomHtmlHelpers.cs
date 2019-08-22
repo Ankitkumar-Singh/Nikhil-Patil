@@ -14,6 +14,7 @@ namespace Assignment_5.CustomHtmlHelpers
 {
     public static class CustomHtmlHelpers
     {
+        #region Table helper extention method
         /// <summary>
         /// Tables the specified emp.
         /// </summary>
@@ -102,5 +103,6 @@ namespace Assignment_5.CustomHtmlHelpers
 
             return new MvcHtmlString(sb.ToString());
         }
+        #endregion
     }
 }

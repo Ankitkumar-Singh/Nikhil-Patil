@@ -1,5 +1,4 @@
 ﻿using Assignment_5.Models;
-using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -10,22 +9,29 @@ namespace Assignment_5.Controllers
 {
     public class CommentsController : Controller
     {
+        #region Declarations
+        /// <summary>The database</summary>
         private EmployeeContext db = new EmployeeContext();
+        #endregion
 
-        // GET: Comments
+        #region Index view
+        /// <summary>Indexes this instance.</summary>
+        /// <returns>Returns the list of comments</returns>
         public ActionResult Index()
         {
             return View(db.Comments.ToList());
         }
+        #endregion
 
+        #region Create method
+        /// <summary>Creates this instance.</summary>
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: Comments/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        /// <summary>Creates the specified comment.</summary>
+        /// <param name="comment">The comment.</param>
         [HttpPost]
         [ValidateInput(false)]
         public ActionResult Create([Bind(Include = "Id,Name,Comment1")] Comment comment)
@@ -55,7 +61,11 @@ namespace Assignment_5.Controllers
 
             return View(comment);
         }
+        #endregion
 
+        #region Delete method
+        /// <summary>Deletes the specified identifier.</summary>
+        /// <param name="id">The identifier.</param>
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -70,8 +80,9 @@ namespace Assignment_5.Controllers
             return View(comment);
         }
 
+        /// <summary>Deletes the confirmed.</summary>
+        /// <param name="id">The identifier.</param>
         [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
             Comment comment = db.Comments.Find(id);
@@ -79,7 +90,11 @@ namespace Assignment_5.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        #endregion
 
+        #region Connection dispose method
+        /// <summary>Releases unmanaged resources and optionally releases managed resources.</summary>
+        /// <param name="disposing">true to release both managed and unmanaged resources; false to release only unmanaged resources.</param>
         protected override void Dispose(bool disposing)
         {
             if (disposing)
@@ -88,5 +103,6 @@ namespace Assignment_5.Controllers
             }
             base.Dispose(disposing);
         }
+        #endregion
     }
 }
